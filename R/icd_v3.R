@@ -41,7 +41,7 @@ icd_v3 = function(traj, beta=0.2, probs=seq(0,1,0.1), polar=FALSE) {
   pesos_bool = matrix(0, nrow=grilla_length, ncol=n)
   for (i in 1:grilla_length) {
     for (j in 1:n) {
-      if (q[i]<=radios_max[j]) pesos_bool[i,j] = 1
+      if (grilla[i]<=radio_max[j]) pesos_bool[i,j] = 1
     }
   }
   pesos = matrix(0, nrow=grilla_length, ncol=n)
@@ -55,8 +55,8 @@ icd_v3 = function(traj, beta=0.2, probs=seq(0,1,0.1), polar=FALSE) {
   # Interpolo
   titas_matrix = matrix(NA, nrow=grilla_length, ncol=n)
   for (i in 1:n) {
-    cond = which(q<=radios_max[i])
-    titas_matrix[cond,i] = predict(traj_polar[[i]], x=q[cond])$y
+    cond = which(grilla<=radio_max[i])
+    titas_matrix[cond,i] = predict(traj_polar[[i]], x=grilla[cond])$y
   }
 
   ## Depth
