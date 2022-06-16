@@ -11,9 +11,9 @@ icd_v3(traj, beta = 0.2, probs = seq(0, 1, 0.1), polar = FALSE)
 
 \item{beta}{Locality level.}
 
-\item{polar}{If TRUE is assumed that trajectories are in polar coordinates. Contrary, is assumed long/lat coordinates.}
+\item{probs}{Probabilities for the grid construction.}
 
-\item{props}{Probabilities for the grid construction.}
+\item{polar}{If TRUE is assumed that trajectories are in polar coordinates. Contrary, is assumed long/lat coordinates.}
 }
 \value{
 a numeric vector which contains the depth for each trajectory.
