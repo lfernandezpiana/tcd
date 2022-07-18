@@ -25,13 +25,13 @@ polar_coordinates = function(trajectory, type="cartesian") {
   # Trajectory: n x 2 matrix. Each column has a coordinate.
   # Type: character. If "cartesian" trajectories are in cartesian coordinates;
   #       if "geografical" coordiantes are in long/lat format.
-  # Returns: n x 2 matrix. The first column is radius and the second is angle.
+  # Returns: n x 2 dataframe. The first column is radius and the second is angle.
 
   if (type=="cartesian") {
     x = as.numeric(trajectory[,1]) - trajectory[1,1] ; y = as.numeric(trajectory[,2]) - trajectory[1,2] # move to (0,0)
     radius = sqrt(x^2 + y^2)
     gamma = atan2(y,x)
-    return(cbind(radius,gamma))
+    return(data.frame(radius=radius,angle=gamma))
   }
 
   else if (type=="geographical") {
@@ -40,7 +40,7 @@ polar_coordinates = function(trajectory, type="cartesian") {
     gamma = atan2(y,x)
     radius = numeric(n)
     for (i in 1:n) radius[i] = harvesing_dist(0,0,x[i],y[i])
-    return(cbind(radius,gamma))
+    return(data.frame(radius=radius,angle=gamma))
   }
 
   else {
