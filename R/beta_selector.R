@@ -11,7 +11,7 @@
 #' tita = as.numeric(rmixvonmises(1000, mu1=pi, mu2=0, kappa1=10, kappa2=10, prop=0.3))
 #' beta_selector(t=tita)
 #'
-
+library(trend)
 beta_selector = function(t, alpha=0.05, beta_grid=seq(0.1,1,0.05)) {
   q = length(beta_grid)
   n = length(t)

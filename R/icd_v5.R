@@ -7,12 +7,12 @@
 #'
 #' @return a numeric vector which contains the depth for each trajectory.
 
-
+library(trend)
 icd_v5 = function(traj, beta=0.2, probs=seq(0,1,0.1), type="geographical", weight=TRUE) {
   ## Calcula la profundidad local integrada para un conjunto de trayectorias
   # INPUT
   # traj: list, lista con las trayectorias.
-  # beta: numeric, parametro de localidad.
+  # beta: si es numeric se toma ese parametro de localidad.para cada circulo. Si es "automatico" se calcula con el algoritmo
   # probs: numeric, vector de probabilidades para construir los cuantiles.
   # type: character, the trajectory type of coordinates: cartesian or geographical.
   # weights: bool, if TRUE a weigth depth is applied.
@@ -70,10 +70,15 @@ icd_v5 = function(traj, beta=0.2, probs=seq(0,1,0.1), type="geographical", weigh
   depth_matrix = matrix(0, nrow=n, ncol=grilla_length)
   for (j in 1:grilla_length) {
     aux = which(is.na(titas_matrix[,j])==FALSE)
-    if (floor(length(aux)*beta)<2) {
+    if (floor(length(aux)*0.2)<2) {
       next
     } else {
-      depth_matrix[aux,j] = cld(titas_matrix[aux,j], beta)
+      if (is.numeric(beta)) {
+        depth_matrix[aux,j] = cld(titas_matrix[aux,j], beta)
+      } else {
+        beta = beta_selector(titas_matrix[aux,j])$beta
+        depth_matrix[aux,j] = cld(titas_matrix[aux,j], beta)
+      }
     }
   }
   # Depth calculus
