@@ -10,7 +10,7 @@
 #' tita = as.numeric(rvonmises(100, mu=pi, kappa=5))
 #' cld(t=tita, beta=0.2)
 
-cld = function(t,beta){
+cld = function(t,beta) {
   ## Esta rutina funciona bien si quiero asignar profundidades locales a un conjunto de datos
   ## respecto de si mismo pero no puedo poner un nuevo punto y calcularle la profundidad local
   # INPUT
