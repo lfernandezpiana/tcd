@@ -47,7 +47,7 @@ icd_v3 = function(traj, beta=0.2, probs=seq(0,1,0.1), polar=FALSE) {
   pesos = matrix(0, nrow=grilla_length, ncol=n)
   for (i in 1:grilla_length) {
     for (j in 1:n) {
-      pesos[i,j] = pesos_bool[i,j]/(sum(pesos_bool[i,], na.rm = TRUE)*grilla_length)
+      pesos[i,j] = sum(pesos_bool[i,])/sum(pesos_bool)
     }
   }
 

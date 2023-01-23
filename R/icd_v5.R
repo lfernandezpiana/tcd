@@ -1,13 +1,15 @@
 #' Integrated Circular Depth (version 5 with weights)
 #'
 #' @param traj A list which contains the trajectories.
-#' @param beta Locality level.
-#' @param probs Probabilities for the grid construction.
-#' @param polar If TRUE is assumed that trajectories are in polar coordinates. Contrary, is assumed long/lat coordinates.
+#' @param beta Locality level numeric between 0 and 1. Could be set as "automatic".
+#' @param probs Sequense of probabilities for grid construction.
+#' @param type If "geographical" made correction for lat and long coordinates.
+#' @param weight If TRUE a weight in each radius is applied.
 #'
 #' @return a numeric vector which contains the depth for each trajectory.
 
-library(trend)
+
+
 icd_v5 = function(traj, beta="automatic", probs=seq(0,1,0.1), type="geographical", weight=TRUE) {
   ## Calcula la profundidad local integrada para un conjunto de trayectorias
   # INPUT
