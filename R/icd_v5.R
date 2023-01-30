@@ -3,7 +3,7 @@
 #' @param traj A list which contains the trajectories.
 #' @param beta Locality level numeric between 0 and 1. Could be set as "automatic".
 #' @param probs Sequense of probabilities for grid construction.
-#' @param type If "geographical" made correction for lat and long coordinates.
+#' @param type The trajectory type of coordinates "geographical" or "cartesian". If "geographical" made correction for lat and long coordinates.
 #' @param weight If TRUE a weight in each radius is applied.
 #'
 #' @return a numeric vector which contains the depth for each trajectory.

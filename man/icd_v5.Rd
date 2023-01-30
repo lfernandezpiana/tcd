@@ -19,7 +19,7 @@ icd_v5(
 
 \item{probs}{Sequense of probabilities for grid construction.}
 
-\item{type}{If "geographical" made correction for lat and long coordinates.}
+\item{type}{The trajectory type of coordinates geographical or cartesian. If "geographical" made correction for lat and long coordinates.}
 
 \item{weight}{If TRUE a weight in each radius is applied.}
 }

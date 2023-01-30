@@ -24,7 +24,7 @@ beta_selector = function(t, alpha=0.05, beta_grid=seq(0.1,1,0.05)) {
   if (pet$p.value < alpha) {
     beta = min(beta_grid[pet$estimate[1]], 1-beta_grid[pet$estimate[1]])
   } else {
-    beta = 0.6
+    beta = 0.2
   }
   salida = list(beta, pet$p.value, desvio)
   names(salida) = c("beta", "p.value", "desvios")
