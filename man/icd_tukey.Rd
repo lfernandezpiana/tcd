@@ -4,26 +4,25 @@
 \alias{icd_tukey}
 \title{Integrated Circular Depth (version Tukey)}
 \usage{
-icd_tukey(
-  traj,
-  beta = "automatic",
-  probs = seq(0, 1, 0.1),
-  type = "geographical",
-  weight = TRUE
-)
+icd_tukey(traj, probs = seq(0, 1, 0.1), type = "geographical", weight = TRUE)
 }
 \arguments{
 \item{traj}{A list which contains the trajectories.}
 
-\item{probs}{Sequense of probabilities for grid construction.}
+\item{probs}{Sequence of probabilities for grid construction.}
 
 \item{type}{The trajectory type of coordinates "geographical" or "cartesian". If "geographical" made correction for lat and long coordinates.}
 
 \item{weight}{If TRUE a weight in each radius is applied.}
 }
 \value{
-a numeric vector which contains the depth for each trajectory.
+icd returns a list containing the following components:
+\itemize{
+\item depth: a numeric vector which contains the depth for each trajectory.
+\item grid: a numeric vector representing the radius grid.
+\item polar: a list that contains the polar coordinates for each trajectory.
+}
 }
 \description{
-Integrated Circular Depth (version Tukey)
+Calculates the integrated circular depth for a bouquet of trajectories using the circular Tukey depth for each circle.
 }

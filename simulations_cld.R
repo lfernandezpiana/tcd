@@ -8,11 +8,11 @@ library(latex2exp)
 library(tcd)
 
 
-### MODELOS
+### MODELS
 
 ## M1
 
-# Parametros
+# Parameters
 n = 2000
 mu1 = pi/2
 kappa1 = 10
@@ -20,12 +20,12 @@ data = rvonmises(n, mu1, kappa1)
 data = as.numeric(data)
 t = seq(0,2*pi,0.01)
 
-# Profundidad
+# Depth
 beta = seq(0.2,0.8,0.2)
 depth = matrix(NA, ncol=4, nrow=length(t))
 for (j in 1:4) depth[,j] =  cld2(t, data, beta[j])
 
-# Data frame para ggplot
+# Data frame to create a ggplot object
 df = data.frame(t=t, depth)
 colnames(df) = c("t", "beta0.2", "beta0.4", "beta0.6", "beta0.8")
 df_long = reshape(df, idvar = "t", timevar="beta", varying = c("beta0.2", "beta0.4", "beta0.6", "beta0.8"),
@@ -41,7 +41,7 @@ df_plot = df_long
 
 ## M2
 
-# Parametros
+# Parameters
 n = 2000
 mu1 = pi/2; mu2 = (3/2)*pi
 kappa1 = 10
@@ -50,12 +50,12 @@ data = rmixedvonmises(n, mu1, mu2, kappa1, kappa1, prop)
 data = as.numeric(data)
 t = seq(0,2*pi,0.01)
 
-# Profundidad
+# Depth
 beta = seq(0.2,0.8,0.2)
 depth = matrix(NA, ncol=4, nrow=length(t))
 for (j in 1:4) depth[,j] =  cld2(t, data, beta[j])
 
-# Data frame para ggplot
+# Data frame to create a ggplot object
 df = data.frame(t=t, depth)
 colnames(df) = c("t", "beta0.2", "beta0.4", "beta0.6", "beta0.8")
 df_long = reshape(df, idvar = "t", timevar="beta", varying = c("beta0.2", "beta0.4", "beta0.6", "beta0.8"),
@@ -71,7 +71,7 @@ df_plot = rbind(df_plot, df_long)
 
 ## M3
 
-# Parametros
+# Parameters
 n = 2000
 mu1 = pi/2; mu2 = (3/2)*pi
 kappa1 = 10; kappa2 = 5
@@ -80,12 +80,12 @@ data = rmixedvonmises(n, mu1, mu2, kappa1, kappa1, prop)
 data = as.numeric(data)
 t = seq(0,2*pi,0.01)
 
-# Profundidad
+# Depth
 beta = seq(0.2,0.8,0.2)
 depth = matrix(NA, ncol=4, nrow=length(t))
 for (j in 1:4) depth[,j] =  cld2(t, data, beta[j])
 
-# Data frame para ggplot
+# Data frame to create a ggplot object
 df = data.frame(t=t, depth)
 colnames(df) = c("t", "beta0.2", "beta0.4", "beta0.6", "beta0.8")
 df_long = reshape(df, idvar = "t", timevar="beta", varying = c("beta0.2", "beta0.4", "beta0.6", "beta0.8"),
@@ -101,7 +101,7 @@ df_plot = rbind(df_plot, df_long)
 
 ## M4
 
-# Parametros
+# Parameters
 n = 2000
 mu1 = pi/2; mu2 = (5/4)*pi
 kappa1 = 0.5; kappa2 = 2
@@ -110,12 +110,12 @@ data = rmixedvonmises(n, mu1, mu2, kappa1, kappa2, prop)
 data = as.numeric(data)
 t = seq(0,2*pi,0.01)
 
-# Profundidad
+# Depth
 beta = seq(0.2,0.8,0.2)
 depth = matrix(NA, ncol=4, nrow=length(t))
 for (j in 1:4) depth[,j] =  cld2(t, data, beta[j])
 
-# Data frame para ggplot
+# Data frame to create a ggplot object
 df = data.frame(t=t, depth)
 colnames(df) = c("t", "beta0.2", "beta0.4", "beta0.6", "beta0.8")
 df_long = reshape(df, idvar = "t", timevar="beta", varying = c("beta0.2", "beta0.4", "beta0.6", "beta0.8"),
@@ -135,7 +135,7 @@ ggplot(df_plot, aes(x=t, y=depth, colour=beta, group=beta, linetype=beta)) + geo
   theme(strip.background =element_rect(fill="white"))
 
 
-## Grafico Densidades
+## Density plots
 
 t = seq(0,2*pi,0.01)
 

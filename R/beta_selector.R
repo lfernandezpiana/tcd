@@ -1,9 +1,12 @@
 #' Beta Selector
 #'
-#' @param t A numeric vector of angles to calculate the depth.
-#' @param beta Locality parameter.
+#' Selects \eqn{\beta} in a data driven way for a circular sample.
 #'
-#' @return a list width the beta selected, the p.value and the vector of standard deviations.
+#' @param t A numeric vector of angles.
+#' @param alpha Level for pettitt.test.
+#' @param beta_grid: A numeric vector with values between 0 y 1. It represents a grid of beta values.
+#'
+#' @return A list width the beta selected, the p.value and the vector of standard deviations.
 #'
 #' @examples
 #'
@@ -11,8 +14,6 @@
 #' tita = as.numeric(rmixvonmises(1000, mu1=pi, mu2=0, kappa1=10, kappa2=10, prop=0.3))
 #' beta_selector(t=tita)
 #'
-
-library(trend)
 
 beta_selector = function(t, alpha=0.05, beta_grid=seq(0.1,1,0.05)) {
   q = length(beta_grid)

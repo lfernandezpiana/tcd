@@ -1,5 +1,7 @@
 #' Circular Local Depth
 #'
+#' Calculates the circular depth for a sample.
+#'
 #' @param t A numeric vector of angles to calculate the depth.
 #' @param beta Locality parameter.
 #'

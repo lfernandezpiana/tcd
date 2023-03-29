@@ -1,16 +1,54 @@
 #' Integrated Circular Depth (version 5 with weights)
 #'
+#' Calculates the integrated circular depth for a bouquet of trajectories.
+#'
 #' @param traj A list which contains the trajectories.
-#' @param beta Locality level numeric between 0 and 1. Could be set as "automatic".
-#' @param probs Sequense of probabilities for grid construction.
+#' @param beta Locality level numeric between 0 and 1. Could be set as "automatic" and beta is selected in a data driven way.
+#' @param probs Sequence of probabilities for grid construction.
 #' @param type The trajectory type of coordinates "geographical" or "cartesian". If "geographical" made correction for lat and long coordinates.
 #' @param weight If TRUE a weight in each radius is applied.
 #'
-#' @return a numeric vector which contains the depth for each trajectory.
+#' @return icd returns a list containing the following components:
+#' - depth: a numeric vector which contains the depth for each trajectory.
+#' - grid: a numeric vector representing the radius grid.
+#' - polar: a list that contains the polar coordinates for each trajectory.
+#'
+#' @examples
+#'
+#' library(trend)
+#' library(tcd)
+#'
+#' # Trajectories parameters
+#' tita_0 = pi
+#' alpha_epsilon = 0.05
+#' size = 0.1
+#' po = c(0,0)
+#' m = 30
+
+#' n = 100
+#' tray = vector(mode="list", length=n)
+#' for (j in 1:n) {
+#'   P = matrix(0, nrow=m, ncol=2)
+#'   P[1,] = po
+#'   tita = tita_0
+#'   for (i in 2:m) {
+#'     tita = c(tita, tita[i-1] + alpha_epsilon*rbinom(1,1,0.5))
+#'     P[i,] = P[i-1,] + size*c(cos(tita[i]), sin(tita[i]))
+#'   }
+#'   tray[[j]] = P
+#' }
+#' # Depth
+#' depth = icd(tray, probs = seq(0.1,1,0.05), type="cartesian")
+#' q_max = which(depth$depth>quantile(depth$depth, 0.9))
+#' q_min = which(depth$depth<quantile(depth$depth, 0.10))
+#'
+#' plot(tray[[1]], type="n", xlim=c(-3,3), ylim=c(-2,2), xlab="", ylab="", main="Ejemplo 1")
+#' for (i in 1:n) lines(tray[[i]], col="lightgrey")
+#' for (i in q_max) lines(tray[[i]], col="blue")
+#' for (i in q_min) lines(tray[[i]], col="red")
 
 
-
-icd_v5 = function(traj, beta="automatic", probs=seq(0,1,0.1), type="geographical", weight=TRUE) {
+icd = function(traj, beta="automatic", probs=seq(0,1,0.1), type="geographical", weight=TRUE) {
   ## Calcula la profundidad local integrada para un conjunto de trayectorias
   # INPUT
   # traj: list, lista con las trayectorias.

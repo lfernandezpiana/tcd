@@ -1,14 +1,16 @@
 Package: tcd
 Type: Package
 Title: Trajectory Circular depth
-Version: 0.1.0
+Version: 0.2.0
 Author: Lucas Fernandez Piana
 Maintainer: Lucas Fernandez Piana <lucasfernandezpiana@gmail.com>
-Description: this packages contains functions to calculated the trajectory circular depth.
-    Also it has a routine for circular data depth.  
+Description: this package containts two main utilities, the circular local depth (cld) and the integrated circular depth.
+             (Creo que falta definir un poco esto todavía.)   
 License: `use_mit_license()`
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports:
+    mathjaxr,
     trend
+RdMacros: mathjaxr

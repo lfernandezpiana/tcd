@@ -6,10 +6,10 @@ library(ggplot2)
 library(tcd)
 library(trend)
 
-## MODELO 1
-# Dos clases con angulos de salida opuestos
+## MODEL 1
+# Two classes with initial opposite angles.
 
-# Parametros iniciales clase 1
+# Parameters class 1
 tita_0 = pi
 alpha_epsilon = 0.05
 size = 0.1
@@ -30,7 +30,7 @@ for (j in 1:n1) {
 }
 clase = rep(1,n1)
 
-# Parametros iniciales clase 2
+# Parameters class 2
 tita_0 = 0
 alpha_epsilon = 0.05
 size = 0.1
@@ -55,7 +55,7 @@ tray = c(tray1, tray2)
 n = n1 + n2
 
 # Depth
-depth = icd_v5(tray, probs = seq(0.1,1,0.05), type="cartesian") 
+depth = icd(tray, probs = seq(0.1,1,0.05), type="cartesian")
 q_max = which(depth$depth>quantile(depth$depth, 0.9))
 q_min = which(depth$depth<quantile(depth$depth, 0.10))
 
@@ -71,32 +71,10 @@ for (i in 1:n) lines(tray[[i]], col="lightgrey")
 for (i in q_max) lines(tray[[i]], col="blue")
 for (i in q_min) lines(tray[[i]], col="red")
 
-# Plot con ggplot
-data = data.frame(x=tray1[[1]][,1], y=tray1[[1]][,2])
-g1 = ggplot(data=data, aes(x=x, y=y)) + geom_line(color="grey") + xlim(-3,3) + ylim(-2,2) + theme_light()
-for (i in 1:n1) {
-  data = data.frame(x=tray1[[i]][,1], y=tray1[[i]][,2])
-  g1 = g1 + geom_path(data=data, aes(x=x, y=y), color="lightgrey")
-}
-for (i in 1:n2) {
-  data = data.frame(x=tray2[[i]][,1], y=tray2[[i]][,2])
-  g1 = g1 + geom_path(data=data, aes(x=x, y=y), color="lightgrey")
-}
-for (i in q_max) {
-  data = data.frame(x=tray[[i]][,1], y=tray[[i]][,2])
-  g1 = g1 + geom_path(data=data, aes(x=x, y=y), color="blue")
-}
-for (i in q_min) {
-  data = data.frame(x=tray[[i]][,1], y=tray[[i]][,2])
-  g1 = g1 + geom_path(data=data, aes(x=x, y=y), color="red")
-}
-g1
+## Model 2
+# Three classes with initial angles of 60 degrees.
 
-
-## Modelo 2
-# Tres clases con angulos de 60 grados
-
-# Parametros iniciales clase 1
+# Parameters class 1
 tita_0 = 2*pi/3
 alpha_epsilon = 0.05
 size = 0.1
@@ -118,7 +96,7 @@ for (j in 1:n1) {
 
 clase = rep(1,n1)
 
-# Parametros iniciales clase 2
+# Parameters class 2
 tita_0 = 4*pi/3
 alpha_epsilon = 0.05
 size = 0.1
@@ -139,7 +117,7 @@ for (j in 1:n2) {
 }
 clase = c(clase, rep(2,n2))
 
-# Parametros iniciales clase 3
+# Parameters class 3
 tita_0 = 6*pi/3
 alpha_epsilon = 0.05
 size = 0.1
@@ -167,7 +145,7 @@ plot(tray[[1]], type="n", xlim=c(-3,3), ylim=c(-3,3), xlab="", ylab="", main="Ej
 for (i in 1:n) lines(tray[[i]], col=clase[i])
 
 # Depth
-depth = icd_v5(tray,beta=0.25, probs = seq(0.1,1,0.05), type="cartesian") 
+depth = icd(tray,beta=0.25, probs = seq(0.1,1,0.05), type="cartesian")
 q_max = which(depth$depth>quantile(depth$depth, 0.95))
 q_min = which(depth$depth<quantile(depth$depth, 0.1))
 
@@ -183,35 +161,10 @@ for (i in 1:n) lines(tray[[i]], col="lightgrey")
 for (i in q_max) lines(tray[[i]], col="blue")
 for (i in q_min) lines(tray[[i]], col="red")
 
-# Plot con ggplot
-data = data.frame(x=tray1[[1]][,1], y=tray1[[1]][,2])
-g2 = ggplot(data=data, aes(x=x, y=y)) + geom_line(color="grey") + xlim(-3,3) + ylim(-2,2) + theme_light()
-for (i in 1:n1) {
-  data = data.frame(x=tray1[[i]][,1], y=tray1[[i]][,2])
-  g2 = g2 + geom_path(data=data, aes(x=x, y=y), color="lightgrey")
-}
-for (i in 1:n2) {
-  data = data.frame(x=tray2[[i]][,1], y=tray2[[i]][,2])
-  g2 = g2 + geom_path(data=data, aes(x=x, y=y), color="lightgrey")
-}
-for (i in 1:n3) {
-  data = data.frame(x=tray3[[i]][,1], y=tray3[[i]][,2])
-  g2 = g2 + geom_path(data=data, aes(x=x, y=y), color="lightgrey")
-}
-for (i in q_max) {
-  data = data.frame(x=tray[[i]][,1], y=tray[[i]][,2])
-  g2 = g2 + geom_path(data=data, aes(x=x, y=y), color="blue")
-}
-for (i in q_min) {
-  data = data.frame(x=tray[[i]][,1], y=tray[[i]][,2])
-  g2 = g2 + geom_path(data=data, aes(x=x, y=y), color="red")
-}
-g2
 
+## MODEL 3
 
-## MODELO 3
-
-# Parametros iniciales clase 1
+# Parameters class 1
 tita_0 = pi
 alpha_epsilon = 0.05
 size = 0.1
@@ -233,7 +186,7 @@ for (j in 1:n1) {
 
 clase = rep(1,n1)
 
-# Parametros iniciales clase 2
+# Parameters class 2
 tita_0 = pi/2
 alpha_epsilon = -0.1
 size = 0.15
@@ -258,7 +211,7 @@ n = n1 + n2
 tray = c(tray1, tray2)
 
 # Depth
-depth = icd_v5(tray, probs = seq(0.1,0.95,0.01), type="cartesian") 
+depth = icd(tray, probs = seq(0.1,0.95,0.01), type="cartesian")
 q_max = which(depth$depth>quantile(depth$depth, 0.9))
 q_min = which(depth$depth<quantile(depth$depth, 0.1))
 
@@ -272,7 +225,7 @@ for (i in q_min) lines(tray[[i]], col="red")
 
 # Plot con ggplot
 data = data.frame(x=tray1[[1]][,1], y=tray1[[1]][,2])
-g3 = ggplot(data=data, aes(x=x, y=y)) + geom_line(color="grey") + xlim(-3,4) + 
+g3 = ggplot(data=data, aes(x=x, y=y)) + geom_line(color="grey") + xlim(-3,4) +
   ylim(-2,4) + theme_light()
 for (i in 1:n1) {
   data = data.frame(x=tray1[[i]][,1], y=tray1[[i]][,2])
@@ -293,11 +246,10 @@ for (i in q_min) {
 g3
 
 
-## MODELO 4
-# Nota: cambiar para que quede un modelo de trayectorias solidas bien juntas con 
-# un 10% raro que lo detecte como menos profundo.
+## MODEL 4
+# A 10% of outliers.
 
-# Parametros iniciales clase 1
+# Parameters class 1
 tita_0 = pi
 alpha_epsilon = 0.05
 size = 0.1
@@ -319,7 +271,7 @@ for (j in 1:n1) {
 
 clase = rep(1,n1)
 
-# Parametros iniciales clase 2
+# Parameters class 2
 tita_0 = pi
 alpha_epsilon = 0.05
 size = 0.5
@@ -344,38 +296,13 @@ n = n1 + n2
 tray = c(tray1, tray2)
 
 # Depth
-depth = icd_v5(tray, probs = seq(0.05,1,0.01), type="cartesian") 
+depth = icd(tray, probs = seq(0.05,1,0.01), type="cartesian")
 q_max = which(depth$depth>quantile(depth$depth, 0.9))
 q_min = which(depth$depth<quantile(depth$depth, 0.1))
 
-plot(tray[[1]], type="n", xlim=c(-7.5,5.5), ylim=c(-7,6), xlab="", ylab="", 
-     main="Ejemplo 4")
-#r=depth$grid[depth$grid>quantile(depth$grid,0.1)]
-#t = seq(0,2*pi,0.01)
-#for (i in 1:length(r)) lines(r[i]*cos(t), r[i]*sin(t), col="grey", lty=2)
+plot(tray[[1]], type="n", xlim=c(-7.5,5.5), ylim=c(-7,6), xlab="", ylab="", main="Ejemplo 4")
 for (i in 1:n) lines(tray[[i]], col="lightgrey")
 for (i in q_max) lines(tray[[i]], col="blue")
 for (i in q_min) lines(tray[[i]], col="red")
 
 
-# Plot con ggplot
-data = data.frame(x=tray1[[1]][,1], y=tray1[[1]][,2])
-g4 = ggplot(data=data, aes(x=x, y=y)) + geom_line(color="grey") + xlim(-7.5,6) + 
-  ylim(-8,6) + theme_light()
-for (i in 1:n1) {
-  data = data.frame(x=tray1[[i]][,1], y=tray1[[i]][,2])
-  g4 = g4 + geom_path(data=data, aes(x=x, y=y), color="lightgrey")
-}
-for (i in 1:n2) {
-  data = data.frame(x=tray2[[i]][,1], y=tray2[[i]][,2])
-  g4 = g4 + geom_path(data=data, aes(x=x, y=y), color="lightgrey")
-}
-for (i in q_max) {
-  data = data.frame(x=tray[[i]][,1], y=tray[[i]][,2])
-  g4 = g4 + geom_path(data=data, aes(x=x, y=y), color="blue")
-}
-for (i in q_min) {
-  data = data.frame(x=tray[[i]][,1], y=tray[[i]][,2])
-  g4 = g4 + geom_path(data=data, aes(x=x, y=y), color="red")
-}
-g4 

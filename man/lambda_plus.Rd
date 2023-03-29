@@ -9,15 +9,15 @@ lambda_plus(pos, lambda, n)
 \arguments{
 \item{x}{A numeric vector of angles to calculate the depth.}
 
-\item{data}{A numeric vector use to calculate depth.}
+\item{data}{A numeric vector that will be used to calculate depth.}
 
 \item{beta}{Locality parameter.}
 }
 \value{
-a numeric vector with the circular depth for each value of t.
+A numeric vector with the circular depth for each value of x.
 }
 \description{
-Circular Local Depth
+Calculates the circular local depth for a grid of values based on a sample.
 }
 \examples{
 

@@ -15,7 +15,7 @@ cld(t, beta)
 a numeric vector with the circular depth for each value of t.
 }
 \description{
-Circular Local Depth
+Calculates the circular depth for a sample.
 }
 \examples{
 

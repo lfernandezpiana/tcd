@@ -1,15 +1,18 @@
 #' Circular Local Depth
 #'
+#' Calculates the circular local depth for a grid of values based on a sample.
+#'
 #' @param x A numeric vector of angles to calculate the depth.
-#' @param data A numeric vector use to calculate depth.
+#' @param data A numeric vector that will be used to calculate depth.
 #' @param beta Locality parameter.
 #'
-#' @return a numeric vector with the circular depth for each value of t.
+#' @return A numeric vector with the circular depth for each value of x.
+#'
 #' @examples
 #'
 #' library(circular)
 #' tita = as.numeric(rvonmises(100, mu=pi, kappa=5))
-#' cld(t=tita, beta=0.2)
+#' cld2(x=0, data=tita, beta=0.2)
 
 ## AUXILIARY FUNCTIONS
 
