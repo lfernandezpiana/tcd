@@ -23,5 +23,5 @@ Calculates the circular local depth for a grid of values based on a sample.
 
 library(circular)
 tita = as.numeric(rvonmises(100, mu=pi, kappa=5))
-cld(t=tita, beta=0.2)
+cld2(x=0, data=tita, beta=0.2)
 }

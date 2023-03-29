@@ -26,3 +26,36 @@ icd returns a list containing the following components:
 \description{
 Calculates the integrated circular depth for a bouquet of trajectories using the circular Tukey depth for each circle.
 }
+\examples{
+
+library(trend)
+library(circular)
+
+# Trajectories parameters
+tita_0 = pi
+alpha_epsilon = 0.05
+size = 0.1
+po = c(0,0)
+m = 30
+n = 100
+tray = vector(mode="list", length=n)
+for (j in 1:n) {
+  P = matrix(0, nrow=m, ncol=2)
+  P[1,] = po
+  tita = tita_0
+  for (i in 2:m) {
+    tita = c(tita, tita[i-1] + alpha_epsilon*rbinom(1,1,0.5))
+    P[i,] = P[i-1,] + size*c(cos(tita[i]), sin(tita[i]))
+  }
+  tray[[j]] = P
+}
+# Depth
+depth = icd_tukey(tray, probs = seq(0.1,1,0.05), type="cartesian")
+q_max = which(depth$depth>quantile(depth$depth, 0.9))
+q_min = which(depth$depth<quantile(depth$depth, 0.10))
+
+plot(tray[[1]], type="n", xlim=c(-3,3), ylim=c(-2,2), xlab="", ylab="", main="Ejemplo 1")
+for (i in 1:n) lines(tray[[i]], col="lightgrey")
+for (i in q_max) lines(tray[[i]], col="blue")
+for (i in q_min) lines(tray[[i]], col="red")
+}

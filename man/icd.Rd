@@ -63,6 +63,7 @@ q_max = which(depth$depth>quantile(depth$depth, 0.9))
 q_min = which(depth$depth<quantile(depth$depth, 0.10))
 
 plot(tray[[1]], type="n", xlim=c(-3,3), ylim=c(-2,2), xlab="", ylab="", main="Ejemplo 1")
+for (i in 1:n) lines(tray[[i]], col="lightgrey")
 for (i in q_max) lines(tray[[i]], col="blue")
 for (i in q_min) lines(tray[[i]], col="red")
 }

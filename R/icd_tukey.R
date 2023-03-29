@@ -15,7 +15,7 @@
 #' @examples
 #'
 #' library(trend)
-#' library(tcd)
+#' library(circular)
 #'
 #' # Trajectories parameters
 #' tita_0 = pi
